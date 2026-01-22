@@ -71,5 +71,5 @@ func main() {
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	r.Run("localhost:" + cfg.Port)
+	r.Run(":" + cfg.Port)
 }
