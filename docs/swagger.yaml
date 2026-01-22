@@ -69,6 +69,7 @@ definitions:
         example: 64f8c...
         type: string
     type: object
+host: localhost:8080
 info:
   contact: {}
   description: Personal finance ledger API
@@ -227,6 +228,8 @@ paths:
       summary: Register new user
       tags:
       - auth
+schemes:
+- http
 securityDefinitions:
   BearerAuth:
     in: header
