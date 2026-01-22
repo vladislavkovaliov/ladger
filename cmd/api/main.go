@@ -6,6 +6,7 @@ import (
 	"log"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/vladislavkovaliov/ledger/internal/config"
 	router "github.com/vladislavkovaliov/ledger/internal/http"
@@ -25,7 +26,9 @@ import (
 // @title Ledger API
 // @version 1.0
 // @description Personal finance ledger API
+// @host 192.168.1.111:8080
 // @BasePath /
+// @schemes http
 // @securityDefinitions.apikey BearerAuth
 // @in header
 // @name Authorization
@@ -51,6 +54,8 @@ func main() {
 	handlerUser := handlers.NewUserHandler(serviceUser, *cfg)
 
 	r := gin.Default()
+
+	r.Use(cors.Default())
 
 	r.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
 		return fmt.Sprintf(
