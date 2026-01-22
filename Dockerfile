@@ -8,7 +8,7 @@ RUN go mod download
 
 COPY . .
 
-RUN go install github.com/swaggo/swag/cmd/swag@latest
+# RUN go install github.com/swaggo/swag/cmd/swag@latest
 
 # RUN swag init -g ./cmd/api/main.go 
 
@@ -16,7 +16,7 @@ RUN go install github.com/swaggo/swag/cmd/swag@latest
 #       sed -i 's/"host": "localhost:8080"/"host": "192.168.1.111:8080"/' docs/swagger.json; \
 #     fi
 
-# RUN cat docs/swagger.json 
+RUN cat docs/swagger.json 
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -o app ./cmd/api
