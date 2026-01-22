@@ -8,7 +8,7 @@
 /*.dylib
 
 # Go modules
-/go.sum
+#/go.sum
 
 # Vendor folder (если используешь vendoring)
 vendor/
