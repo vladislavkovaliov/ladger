@@ -374,7 +374,7 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "",
 	BasePath:         "/",
-	Schemes:          []string{"http"},
+	Schemes:          []string{},
 	Title:            "Ledger API",
 	Description:      "Personal finance ledger API",
 	InfoInstanceName: "swagger",

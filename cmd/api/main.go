@@ -26,7 +26,6 @@ import (
 // @version 1.0
 // @description Personal finance ledger API
 // @BasePath /
-// @schemes http
 // @securityDefinitions.apikey BearerAuth
 // @in header
 // @name Authorization
