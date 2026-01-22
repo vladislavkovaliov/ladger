@@ -16,6 +16,8 @@ RUN if [ -f docs/swagger.json ]; then \
       sed -i 's/"host": "localhost:8080"/"host": "192.168.1.111:8080"/' docs/swagger.json; \
     fi
 
+RUN cat docs/swagger.json 
+
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -o app ./cmd/api
 
