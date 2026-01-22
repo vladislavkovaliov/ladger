@@ -26,7 +26,6 @@ import (
 // @title Ledger API
 // @version 1.0
 // @description Personal finance ledger API
-// @host localhost:8080
 // @BasePath /
 // @schemes http
 // @securityDefinitions.apikey BearerAuth
