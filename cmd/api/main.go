@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/vladislavkovaliov/ledger/internal/config"
@@ -53,6 +54,18 @@ func main() {
 	handlerUser := handlers.NewUserHandler(serviceUser, *cfg)
 
 	r := gin.Default()
+
+	r.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
+		return fmt.Sprintf(
+			"%s - [%s] \"%s %s\" %d %s\n",
+			param.ClientIP,
+			param.TimeStamp.Format(time.RFC3339),
+			param.Method,
+			param.Path,
+			param.StatusCode,
+			param.Latency,
+		)
+	}))
 
 	router.RegisterRouter(r, handlerPayment, handlerUser, cfg)
 
