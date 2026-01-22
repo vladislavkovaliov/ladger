@@ -27,6 +27,10 @@ import (
 // @host localhost:8080
 // @BasePath /
 // @schemes http
+
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
 func main() {
 	cfg := config.LoadConfig()
 
@@ -46,13 +50,13 @@ func main() {
 
 	repoUser := repository_user.NewUserRepository(db.Collection("users"))
 	serviceUser := service.NewUserService(repoUser)
-	handlerUser := handlers.NewUserHandler(serviceUser)
+	handlerUser := handlers.NewUserHandler(serviceUser, *cfg)
 
 	r := gin.Default()
 
+	router.RegisterRouter(r, handlerPayment, handlerUser, cfg)
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	router.RegisterRouter(r, handlerPayment, handlerUser)
-
-	r.Run(":" + cfg.Port)
+	r.Run("localhost:" + cfg.Port)
 }

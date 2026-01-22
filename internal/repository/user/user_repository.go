@@ -34,14 +34,17 @@ func (r *UserRepository) Save(ctx context.Context, u *user.User) error {
 
 func (r *UserRepository) FindByEmail(ctx context.Context, email string) (*user.User, error) {
 	var doc userDocument
-	fmt.Println(email)
 
 	err := r.collection.FindOne(ctx, bson.M{"email": email}).Decode(&doc)
-	fmt.Println(doc)
-	fmt.Println(42)
+
 	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, nil
+		}
+
 		return nil, err
 	}
+	fmt.Println(43)
 
 	return toDomain(&doc), nil
 }

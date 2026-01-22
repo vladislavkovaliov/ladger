@@ -22,6 +22,7 @@ func NewPaymentHandler(s *service.PaymentService) *PaymentHandler {
 // @Tags payments
 // @Accept json
 // @Produce json
+// @Security BearerAuth
 // @Param input body dto.CreatePaymentRequest true "Payment data"
 // @Success 201 {object} dto.PaymentResponse
 // @Failure 400 {object} dto.ErrorResponse
@@ -50,6 +51,7 @@ func (h *PaymentHandler) Create(c *gin.Context) {
 // @Summary List all payments
 // @Description Get a list of all payments
 // @Tags payments
+// @Security BearerAuth
 // @Produce json
 // @Success 200 {array} dto.PaymentResponse
 // @Failure 500 {object} dto.ErrorResponse

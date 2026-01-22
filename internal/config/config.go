@@ -3,6 +3,7 @@ package config
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 )
@@ -10,6 +11,8 @@ import (
 type Config struct {
 	Port        string
 	DatabaseUrl string
+	Secret      string
+	Expiration  time.Duration
 }
 
 func LoadConfig() *Config {
@@ -19,9 +22,19 @@ func LoadConfig() *Config {
 		log.Println(".env file is not found, using system env")
 	}
 
+	expStr := getEnv("JWT_EXPIRATION", "24h")
+
+	expiration, err := time.ParseDuration(expStr)
+
+	if err != nil {
+		log.Fatalf("invalid JWT_EXPIRATION: %v", err)
+	}
+
 	cfg := &Config{
 		Port:        getEnv("PORT", "8080"),
 		DatabaseUrl: getEnv("DATABASE_URL", "mongodb://localhost:27017/ledger?replicaSet=rs0"),
+		Secret:      getEnv("JWT_SECRET", "jwt-secret"),
+		Expiration:  expiration,
 	}
 
 	return cfg
