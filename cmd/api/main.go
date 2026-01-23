@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -33,6 +34,11 @@ func main() {
 	cfg := config.LoadConfig()
 
 	fmt.Println("Starting server on port", cfg.Port)
+
+	fmt.Println("PORT =", os.Getenv("PORT"))
+	fmt.Println("DATABASE_URL =", os.Getenv("DATABASE_URL"))
+	fmt.Println("JWT_SECRET =", os.Getenv("JWT_SECRET"))
+	fmt.Println("JWT_EXPIRATION =", os.Getenv("JWT_EXPIRATION"))
 
 	client, db, err := mongoClient.NewMongoClient(cfg)
 

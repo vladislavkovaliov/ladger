@@ -16,11 +16,11 @@ type Config struct {
 }
 
 func LoadConfig() *Config {
-	err := godotenv.Load()
+	_ = godotenv.Load()
 
-	if err != nil {
-		log.Println(".env file is not found, using system env")
-	}
+	// if err != nil {
+	// 	log.Println(".env file is not found, using system env")
+	// }
 
 	expStr := os.Getenv("JWT_EXPIRATION")
 
@@ -31,9 +31,9 @@ func LoadConfig() *Config {
 	}
 
 	cfg := &Config{
-		Port:        os.Getenv("PORT"),
-		DatabaseUrl: os.Getenv("DATABASE_URL"),
-		Secret:      os.Getenv("JWT_SECRET"),
+		Port:        getEnv("PORT", "8080"),
+		DatabaseUrl: getEnv("DATABASE_URL", "mongodb://localhost:27017/ledger"),
+		Secret:      getEnv("JWT_SECRET", "dev-secret"),
 		Expiration:  expiration,
 	}
 
