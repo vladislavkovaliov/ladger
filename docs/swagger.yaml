@@ -1,5 +1,20 @@
 basePath: /
 definitions:
+  dto.ConfigResponse:
+    properties:
+      databaseUrl:
+        example: ok
+        type: string
+      port:
+        example: ok
+        type: string
+      secret:
+        example: ok
+        type: string
+      status:
+        example: ok
+        type: string
+    type: object
   dto.CreatePaymentRequest:
     properties:
       amount:
@@ -75,6 +90,19 @@ info:
   title: Ledger API
   version: "1.0"
 paths:
+  /config:
+    get:
+      description: Check service config
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ConfigResponse'
+      summary: Get config
+      tags:
+      - system
   /health:
     get:
       description: Check service availability

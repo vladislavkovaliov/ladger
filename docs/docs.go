@@ -15,6 +15,26 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/config": {
+            "get": {
+                "description": "Check service config",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "system"
+                ],
+                "summary": "Get config",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ConfigResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/health": {
             "get": {
                 "description": "Check service availability",
@@ -258,6 +278,27 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "dto.ConfigResponse": {
+            "type": "object",
+            "properties": {
+                "databaseUrl": {
+                    "type": "string",
+                    "example": "ok"
+                },
+                "port": {
+                    "type": "string",
+                    "example": "ok"
+                },
+                "secret": {
+                    "type": "string",
+                    "example": "ok"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "ok"
+                }
+            }
+        },
         "dto.CreatePaymentRequest": {
             "type": "object",
             "properties": {

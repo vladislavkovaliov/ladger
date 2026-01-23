@@ -10,6 +10,10 @@ import (
 func RegisterRouter(r *gin.Engine, payment *handlers.PaymentHandler, user *handlers.UserHandler, cfg *config.Config) {
 	r.GET("/health", handlers.HealthHandler)
 
+	r.GET("/config", func(c *gin.Context) {
+		handlers.ConfigHandler(c, cfg)
+	})
+
 	// r.POST("/payments", payment.Create)
 	// r.GET("/payments", payment.List)
 

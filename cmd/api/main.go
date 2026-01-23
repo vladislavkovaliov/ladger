@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"net/http"
 	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/vladislavkovaliov/ledger/internal/config"
 	router "github.com/vladislavkovaliov/ledger/internal/http"
 	handlers "github.com/vladislavkovaliov/ledger/internal/http/handlers"
@@ -18,7 +18,7 @@ import (
 	service "github.com/vladislavkovaliov/ledger/internal/service"
 
 	// Swagger
-
+	swaggerFiles "github.com/swaggo/files"
 	_ "github.com/vladislavkovaliov/ledger/docs"
 )
 
@@ -68,21 +68,21 @@ func main() {
 
 	router.RegisterRouter(r, handlerPayment, handlerUser, cfg)
 
-	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// r.GET("/swagger/*any", ginSwagger.WrapHandler(
 	// 	swaggerFiles.Handler,
 	// 	ginSwagger.URL(fmt.Sprintf("http://%s:%s/swagger/doc.json", cfg.Host, cfg.Port)),
 	// ))
 
-	r.GET("/swagger/*any", func(c *gin.Context) {
+	// r.GET("/swagger/*any", func(c *gin.Context) {
 
-		url := "/swagger/doc.json"
+	// 	url := "/swagger/doc.json"
 
-		c.Request.URL.Path = url
-		c.Writer.Header().Set("Content-Type", "application/json")
-		http.ServeFile(c.Writer, c.Request, "./docs/swagger.json")
-	})
+	// 	c.Request.URL.Path = url
+	// 	c.Writer.Header().Set("Content-Type", "application/json")
+	// 	http.ServeFile(c.Writer, c.Request, "./docs/swagger.json")
+	// })
 
 	r.Run("0.0.0.0:" + cfg.Port)
 }
