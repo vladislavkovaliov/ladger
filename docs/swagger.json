@@ -8,47 +8,53 @@
     },
     "basePath": "/",
     "paths": {
-        "/config": {
-            "get": {
-                "description": "Check service config",
+        "/auth/create": {
+            "post": {
+                "description": "Create a new user with email and password",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "system"
+                    "auth"
                 ],
-                "summary": "Get config",
-                "responses": {
-                    "200": {
-                        "description": "OK",
+                "summary": "Register new user",
+                "parameters": [
+                    {
+                        "description": "User registration data",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
                         "schema": {
-                            "$ref": "#/definitions/dto.ConfigResponse"
+                            "$ref": "#/definitions/dto.RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/dto.UserResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
                         }
                     }
                 }
             }
         },
-        "/health": {
-            "get": {
-                "description": "Check service availability",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "system"
-                ],
-                "summary": "Health check",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/dto.HealthResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/login": {
+        "/auth/login": {
             "post": {
                 "description": "Authenticate user and return JWT token",
                 "consumes": [
@@ -100,12 +106,49 @@
                 }
             }
         },
+        "/config": {
+            "get": {
+                "description": "Check service config",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "system"
+                ],
+                "summary": "Get config",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ConfigResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "description": "Check service availability",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "system"
+                ],
+                "summary": "Health check",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.HealthResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/payments": {
             "get": {
                 "security": [
-                    {
-                        "BearerAuth": []
-                    },
                     {
                         "BearerAuth": []
                     }
@@ -201,7 +244,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "auth"
+                    "users"
                 ],
                 "summary": "List all users",
                 "responses": {
@@ -212,52 +255,6 @@
                             "items": {
                                 "$ref": "#/definitions/dto.UserResponse"
                             }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/dto.ErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/create": {
-            "post": {
-                "description": "Create a new user with email and password",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "auth"
-                ],
-                "summary": "Register new user",
-                "parameters": [
-                    {
-                        "description": "User registration data",
-                        "name": "input",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/dto.RegisterRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/dto.UserResponse"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/dto.ErrorResponse"
                         }
                     },
                     "500": {
@@ -383,6 +380,10 @@
         "dto.UserResponse": {
             "type": "object",
             "properties": {
+                "create_date": {
+                    "type": "string",
+                    "example": "2026-01-20T00:00:00Z"
+                },
                 "email": {
                     "type": "string",
                     "example": "test@mail.com"

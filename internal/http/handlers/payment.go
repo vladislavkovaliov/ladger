@@ -55,7 +55,6 @@ func (h *PaymentHandler) Create(c *gin.Context) {
 // @Produce json
 // @Success 200 {array} dto.PaymentResponse
 // @Failure 500 {object} dto.ErrorResponse
-// @Security BearerAuth
 // @Router /payments [get]
 func (h *PaymentHandler) List(c *gin.Context) {
 	payments, err := h.service.List(c.Request.Context())

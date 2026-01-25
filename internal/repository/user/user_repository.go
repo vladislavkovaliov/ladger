@@ -2,7 +2,6 @@ package repository_user
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/vladislavkovaliov/ledger/internal/domain/user"
@@ -44,7 +43,6 @@ func (r *UserRepository) FindByEmail(ctx context.Context, email string) (*user.U
 
 		return nil, err
 	}
-	fmt.Println(43)
 
 	return toDomain(&doc), nil
 }
@@ -61,7 +59,7 @@ func (r *UserRepository) FindByID(ctx context.Context, id string) (*user.User, e
 	return toDomain(&doc), nil
 }
 
-func (r *UserRepository) List(ctx context.Context) ([]*user.User, error) {
+func (r *UserRepository) List(ctx context.Context) ([]*user.UserResponse, error) {
 	cursor, err := r.collection.Find(ctx, bson.M{})
 
 	if err != nil {
@@ -70,7 +68,7 @@ func (r *UserRepository) List(ctx context.Context) ([]*user.User, error) {
 
 	defer cursor.Close(ctx)
 
-	var users []*user.User
+	var users []*user.UserResponse
 
 	for cursor.Next(ctx) {
 		var doc userDocument
@@ -79,7 +77,7 @@ func (r *UserRepository) List(ctx context.Context) ([]*user.User, error) {
 			return nil, err
 		}
 
-		users = append(users, toDomain(&doc))
+		users = append(users, toUserResponseDomain(&doc))
 	}
 
 	return users, nil

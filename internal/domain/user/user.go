@@ -8,3 +8,9 @@ type User struct {
 	PasswordHash string
 	CreatedAt    time.Time
 }
+
+type UserResponse struct {
+	ID        string
+	Email     string
+	CreatedAt time.Time
+}

@@ -36,7 +36,7 @@ func NewUserHandler(s *service.UserService, jwtCfg config.Config) *UserHandler {
 // @Success 201 {object} dto.UserResponse
 // @Failure 400 {object} dto.ErrorResponse
 // @Failure 500 {object} dto.ErrorResponse
-// @Router /users/create [post]
+// @Router /auth/create [post]
 func (h *UserHandler) Create(c *gin.Context) {
 	var req struct {
 		Email    string `json:"email"`
@@ -85,7 +85,7 @@ func (h *UserHandler) Create(c *gin.Context) {
 // ListUsers godoc
 // @Summary List all users
 // @Description Get a list of all users (emails only)
-// @Tags auth
+// @Tags users
 // @Produce json
 // @Security BearerAuth
 // @Success 200 {array} dto.UserResponse
@@ -114,7 +114,7 @@ func (h *UserHandler) List(c *gin.Context) {
 // @Failure 400 {object} dto.ErrorResponse
 // @Failure 401 {object} dto.ErrorResponse
 // @Failure 500 {object} dto.ErrorResponse
-// @Router /login [post]
+// @Router /auth/login [post]
 func (h *UserHandler) Login(c *gin.Context) {
 	var req dto.LoginRequest
 

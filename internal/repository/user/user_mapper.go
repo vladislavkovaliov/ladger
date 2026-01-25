@@ -42,3 +42,11 @@ func toDomain(doc *userDocument) *user.User {
 		CreatedAt:    doc.CreatedAt,
 	}
 }
+
+func toUserResponseDomain(doc *userDocument) *user.UserResponse {
+	return &user.UserResponse{
+		ID:        doc.ID.Hex(),
+		Email:     doc.Email,
+		CreatedAt: doc.CreatedAt,
+	}
+}
