@@ -2,90 +2,120 @@ basePath: /
 definitions:
   dto.ConfigResponse:
     properties:
-      databaseUrl:
+      Port:
+        example: "8080"
+        type: string
+      Secret:
         example: ok
         type: string
-      port:
+      Status:
         example: ok
         type: string
-      secret:
+      http://localhost:27017:
         example: ok
         type: string
-      status:
-        example: ok
-        type: string
+    required:
+    - Port
+    - Secret
+    - Status
+    - http://localhost:27017
     type: object
   dto.CreatePaymentRequest:
     properties:
-      amount:
+      Amount:
         example: 1500
         type: integer
-      category_id:
+      CategoryID:
         example: cat_123
         type: string
+    required:
+    - Amount
+    - CategoryID
     type: object
   dto.ErrorResponse:
     properties:
       error:
         example: internal server error
         type: string
+    required:
+    - error
     type: object
   dto.HealthResponse:
     properties:
-      status:
+      Status:
         example: ok
         type: string
+    required:
+    - Status
     type: object
   dto.LoginRequest:
     properties:
-      email:
+      Email:
         type: string
-      password:
+      Password:
         type: string
+    required:
+    - Email
+    - Password
     type: object
   dto.LoginResponse:
     properties:
-      token:
+      Token:
         type: string
+    required:
+    - Token
     type: object
   dto.PaymentResponse:
     properties:
-      amount:
+      Amount:
         example: 1500
         type: integer
-      category_id:
+      CategoryID:
         example: cat_123
         type: string
-      create_date:
+      CreateDate:
         example: "2026-01-20T00:00:00Z"
         type: string
-      id:
+      ID:
         example: 64f8c...
         type: string
-      update_date:
+      UpdateDate:
         example: "2026-01-20T00:00:00Z"
         type: string
+    required:
+    - Amount
+    - CategoryID
+    - CreateDate
+    - ID
+    - UpdateDate
     type: object
   dto.RegisterRequest:
     properties:
-      email:
+      Email:
         example: test@mail.com
         type: string
-      password:
+      Password:
         example: "123456"
         type: string
+    required:
+    - Email
+    - Password
     type: object
   dto.UserResponse:
     properties:
-      create_date:
+      CreatedDate:
         example: "2026-01-20T00:00:00Z"
         type: string
-      email:
+      Email:
         example: test@mail.com
         type: string
-      id:
+      ID:
         example: 64f8c...
         type: string
+    required:
+    - CreatedDate
+    - Email
+    - ID
     type: object
 info:
   contact: {}
@@ -155,6 +185,23 @@ paths:
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
       summary: Login
+      tags:
+      - auth
+  /auth/protected:
+    get:
+      description: Check cookies
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.HealthResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Protected
       tags:
       - auth
   /config:

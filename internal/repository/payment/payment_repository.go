@@ -36,7 +36,7 @@ func (r *PaymentRepository) Save(ctx context.Context, p *payment.Payment) error 
 func (r *PaymentRepository) FindByID(ctx context.Context, id string) (*payment.Payment, error) {
 	var doc paymentDocument
 
-	err := r.collection.FindOne(ctx, bson.M{"_id": id}).Decode(&doc)
+	err := r.collection.FindOne(ctx, bson.M{"_ID": id}).Decode(&doc)
 
 	if err != nil {
 		return nil, err

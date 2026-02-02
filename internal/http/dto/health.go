@@ -1,5 +1,5 @@
 package dto
 
 type HealthResponse struct {
-	Status string `json:"status" example:"ok"`
+	Status string `json:"Status" example:"ok" binding:"required"`
 }

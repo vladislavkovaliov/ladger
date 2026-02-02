@@ -153,5 +153,36 @@ func (h *UserHandler) Login(c *gin.Context) {
 		return
 	}
 
+	c.SetCookie(
+		"ladger-jwt-token",
+		token,
+		3600,        // maxAge
+		"/",         // path
+		"localhost", // domain
+		false,       // secure
+		true,        // httpOnly
+	)
+
 	c.JSON(200, dto.LoginResponse{Token: token})
+}
+
+// Protected godoc
+// @Summary Protected
+// @Description Check cookies
+// @Tags auth
+// @Produce json
+// @Success 200 {object} dto.HealthResponse
+// @Failure 401 {object} dto.ErrorResponse
+// @Router /auth/protected [get]
+func (h *UserHandler) Protected(c *gin.Context) {
+
+	_, err := c.Cookie("token")
+
+	if err != nil {
+		c.JSON(500, gin.H{"error": "unauthorized"})
+
+		return
+	}
+
+	c.JSON(200, gin.H{"status": "ok"})
 }

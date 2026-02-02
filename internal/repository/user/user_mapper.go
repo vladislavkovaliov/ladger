@@ -8,10 +8,10 @@ import (
 )
 
 type userDocument struct {
-	ID           bson.ObjectID `bson:"_id,omitempty"`
-	Email        string        `json:"email" bson:"email"`
+	ID           bson.ObjectID `bson:"_ID,omitempty"`
+	Email        string        `json:"Email" bson:"email"`
 	PasswordHash string        `json:"-" bson:"password_hash"`
-	CreatedAt    time.Time     `json:"created_at" bson:"created_at"`
+	CreatedAt    time.Time     `json:"createdAt" bson:"created_at"`
 }
 
 func toDocument(p *user.User) *userDocument {

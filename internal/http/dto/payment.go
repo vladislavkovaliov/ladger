@@ -1,18 +1,18 @@
 package dto
 
 type CreatePaymentRequest struct {
-	Amount     int64  `json:"amount" example:"1500"`
-	CategoryID string `json:"category_id" example:"cat_123"`
+	Amount     int64  `json:"Amount" example:"1500" binding:"required"`
+	CategoryID string `json:"CategoryID" example:"cat_123" binding:"required"`
 }
 
 type PaymentResponse struct {
-	ID         string `json:"id" example:"64f8c..."`
-	Amount     int64  `json:"amount" example:"1500"`
-	CategoryID string `json:"category_id" example:"cat_123"`
-	CreateDate string `json:"create_date" example:"2026-01-20T00:00:00Z"`
-	UpdateDate string `json:"update_date" example:"2026-01-20T00:00:00Z"`
+	ID         string `json:"ID" example:"64f8c..." binding:"required"`
+	Amount     int64  `json:"Amount" example:"1500" binding:"required"`
+	CategoryID string `json:"CategoryID" example:"cat_123" binding:"required"`
+	CreateDate string `json:"CreateDate" example:"2026-01-20T00:00:00Z" binding:"required"`
+	UpdateDate string `json:"UpdateDate" example:"2026-01-20T00:00:00Z" binding:"required"`
 }
 
 type ErrorResponse struct {
-	Error string `json:"error" example:"internal server error"`
+	Error string `json:"error" example:"internal server error" binding:"required"`
 }

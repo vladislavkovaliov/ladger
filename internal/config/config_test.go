@@ -14,6 +14,6 @@ func TestLoadConfig(t *testing.T) {
 
 	cfg := config.LoadConfig()
 
-	assert.Equal(t, "1234", cfg.Port)
-	assert.Equal(t, "localhost:27017", cfg.DatabaseUrl)
+	assert.Equal(t, "1234", cfg.port)
+	assert.Equal(t, "localhost:27017", cfg.DATABASE_URL)
 }

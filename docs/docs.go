@@ -113,6 +113,32 @@ const docTemplate = `{
                 }
             }
         },
+        "/auth/protected": {
+            "get": {
+                "description": "Check cookies",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Protected",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.HealthResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/config": {
             "get": {
                 "description": "Check service config",
@@ -277,20 +303,26 @@ const docTemplate = `{
     "definitions": {
         "dto.ConfigResponse": {
             "type": "object",
+            "required": [
+                "Port",
+                "Secret",
+                "Status",
+                "http://localhost:27017"
+            ],
             "properties": {
-                "databaseUrl": {
+                "Port": {
+                    "type": "string",
+                    "example": "8080"
+                },
+                "Secret": {
                     "type": "string",
                     "example": "ok"
                 },
-                "port": {
+                "Status": {
                     "type": "string",
                     "example": "ok"
                 },
-                "secret": {
-                    "type": "string",
-                    "example": "ok"
-                },
-                "status": {
+                "http://localhost:27017": {
                     "type": "string",
                     "example": "ok"
                 }
@@ -298,12 +330,16 @@ const docTemplate = `{
         },
         "dto.CreatePaymentRequest": {
             "type": "object",
+            "required": [
+                "Amount",
+                "CategoryID"
+            ],
             "properties": {
-                "amount": {
+                "Amount": {
                     "type": "integer",
                     "example": 1500
                 },
-                "category_id": {
+                "CategoryID": {
                     "type": "string",
                     "example": "cat_123"
                 }
@@ -311,6 +347,9 @@ const docTemplate = `{
         },
         "dto.ErrorResponse": {
             "type": "object",
+            "required": [
+                "error"
+            ],
             "properties": {
                 "error": {
                     "type": "string",
@@ -320,8 +359,11 @@ const docTemplate = `{
         },
         "dto.HealthResponse": {
             "type": "object",
+            "required": [
+                "Status"
+            ],
             "properties": {
-                "status": {
+                "Status": {
                     "type": "string",
                     "example": "ok"
                 }
@@ -329,43 +371,57 @@ const docTemplate = `{
         },
         "dto.LoginRequest": {
             "type": "object",
+            "required": [
+                "Email",
+                "Password"
+            ],
             "properties": {
-                "email": {
+                "Email": {
                     "type": "string"
                 },
-                "password": {
+                "Password": {
                     "type": "string"
                 }
             }
         },
         "dto.LoginResponse": {
             "type": "object",
+            "required": [
+                "Token"
+            ],
             "properties": {
-                "token": {
+                "Token": {
                     "type": "string"
                 }
             }
         },
         "dto.PaymentResponse": {
             "type": "object",
+            "required": [
+                "Amount",
+                "CategoryID",
+                "CreateDate",
+                "ID",
+                "UpdateDate"
+            ],
             "properties": {
-                "amount": {
+                "Amount": {
                     "type": "integer",
                     "example": 1500
                 },
-                "category_id": {
+                "CategoryID": {
                     "type": "string",
                     "example": "cat_123"
                 },
-                "create_date": {
+                "CreateDate": {
                     "type": "string",
                     "example": "2026-01-20T00:00:00Z"
                 },
-                "id": {
+                "ID": {
                     "type": "string",
                     "example": "64f8c..."
                 },
-                "update_date": {
+                "UpdateDate": {
                     "type": "string",
                     "example": "2026-01-20T00:00:00Z"
                 }
@@ -373,12 +429,16 @@ const docTemplate = `{
         },
         "dto.RegisterRequest": {
             "type": "object",
+            "required": [
+                "Email",
+                "Password"
+            ],
             "properties": {
-                "email": {
+                "Email": {
                     "type": "string",
                     "example": "test@mail.com"
                 },
-                "password": {
+                "Password": {
                     "type": "string",
                     "example": "123456"
                 }
@@ -386,16 +446,21 @@ const docTemplate = `{
         },
         "dto.UserResponse": {
             "type": "object",
+            "required": [
+                "CreatedDate",
+                "Email",
+                "ID"
+            ],
             "properties": {
-                "create_date": {
+                "CreatedDate": {
                     "type": "string",
                     "example": "2026-01-20T00:00:00Z"
                 },
-                "email": {
+                "Email": {
                     "type": "string",
                     "example": "test@mail.com"
                 },
-                "id": {
+                "ID": {
                     "type": "string",
                     "example": "64f8c..."
                 }

@@ -8,11 +8,11 @@ import (
 )
 
 type paymentDocument struct {
-	ID         bson.ObjectID `bson:"_id,omitempty"`
-	Amount     int64         `bson:"amount"`
-	CategoryID string        `bson:"category_id,omitempty"`
-	CreateDate time.Time     `bson:"create_date"`
-	UpdateDate time.Time     `bson:"update_date"`
+	ID          bson.ObjectID `bson:"_ID,omitempty"`
+	Amount      int64         `bson:"Amount"`
+	CategoryID  string        `bson:"categoryId,omitempty"`
+	CreatedDate time.Time     `bson:"createdDate"`
+	UpdatedDate time.Time     `bson:"updatedDate"`
 }
 
 func toDocument(p *payment.Payment) *paymentDocument {
@@ -28,11 +28,11 @@ func toDocument(p *payment.Payment) *paymentDocument {
 	}
 
 	return &paymentDocument{
-		ID:         id,
-		Amount:     p.Amount,
-		CategoryID: p.CategoryID,
-		CreateDate: p.CreateDate,
-		UpdateDate: p.UpdateDate,
+		ID:          id,
+		Amount:      p.Amount,
+		CategoryID:  p.CategoryID,
+		CreatedDate: p.CreateDate,
+		UpdatedDate: p.UpdateDate,
 	}
 }
 
@@ -41,7 +41,7 @@ func toDomain(doc *paymentDocument) *payment.Payment {
 		ID:         doc.ID.Hex(),
 		Amount:     doc.Amount,
 		CategoryID: doc.CategoryID,
-		CreateDate: doc.CreateDate,
-		UpdateDate: doc.UpdateDate,
+		CreateDate: doc.CreatedDate,
+		UpdateDate: doc.UpdatedDate,
 	}
 }
