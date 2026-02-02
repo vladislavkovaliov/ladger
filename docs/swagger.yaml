@@ -73,21 +73,21 @@ definitions:
       CategoryID:
         example: cat_123
         type: string
-      CreateDate:
+      CreatedAt:
         example: "2026-01-20T00:00:00Z"
         type: string
       ID:
         example: 64f8c...
         type: string
-      UpdateDate:
+      UpdatedAt:
         example: "2026-01-20T00:00:00Z"
         type: string
     required:
     - Amount
     - CategoryID
-    - CreateDate
+    - CreatedAt
     - ID
-    - UpdateDate
+    - UpdatedAt
     type: object
   dto.RegisterRequest:
     properties:
@@ -103,7 +103,7 @@ definitions:
     type: object
   dto.UserResponse:
     properties:
-      CreatedDate:
+      CreatedAt:
         example: "2026-01-20T00:00:00Z"
         type: string
       Email:
@@ -113,7 +113,7 @@ definitions:
         example: 64f8c...
         type: string
     required:
-    - CreatedDate
+    - CreatedAt
     - Email
     - ID
     type: object

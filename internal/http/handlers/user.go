@@ -123,7 +123,7 @@ func (h *UserHandler) Login(c *gin.Context) {
 
 		return
 	}
-
+	fmt.Println(req)
 	u, err := h.service.FindByEmail(c.Request.Context(), req.Email)
 
 	if err != nil {

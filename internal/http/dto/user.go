@@ -6,7 +6,7 @@ type RegisterRequest struct {
 }
 
 type UserResponse struct {
-	ID          string `json:"ID" example:"64f8c..." binding:"required"`
-	Email       string `json:"Email" example:"test@mail.com" binding:"required"`
-	CreatedDate string `json:"CreatedDate" example:"2026-01-20T00:00:00Z" binding:"required"`
+	ID        string `json:"ID" example:"64f8c..." binding:"required"`
+	Email     string `json:"Email" example:"test@mail.com" binding:"required"`
+	CreatedAt string `json:"CreatedAt" example:"2026-01-20T00:00:00Z" binding:"required"`
 }

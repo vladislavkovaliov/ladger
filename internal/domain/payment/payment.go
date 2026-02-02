@@ -5,7 +5,7 @@ import "time"
 type Payment struct {
 	ID         string
 	Amount     int64
-	CreateDate time.Time
-	UpdateDate time.Time
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
 	CategoryID string
 }

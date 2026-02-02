@@ -18,11 +18,11 @@ func NewPaymentRepository(col *mongo.Collection) *PaymentRepository {
 }
 
 func (r *PaymentRepository) Save(ctx context.Context, p *payment.Payment) error {
-	if p.CreateDate.IsZero() {
-		p.CreateDate = time.Now()
+	if p.CreatedAt.IsZero() {
+		p.CreatedAt = time.Now()
 	}
 
-	p.UpdateDate = time.Now()
+	p.UpdatedAt = time.Now()
 
 	doc := toDocument(p)
 

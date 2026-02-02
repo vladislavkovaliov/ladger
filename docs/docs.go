@@ -400,9 +400,9 @@ const docTemplate = `{
             "required": [
                 "Amount",
                 "CategoryID",
-                "CreateDate",
+                "CreatedAt",
                 "ID",
-                "UpdateDate"
+                "UpdatedAt"
             ],
             "properties": {
                 "Amount": {
@@ -413,7 +413,7 @@ const docTemplate = `{
                     "type": "string",
                     "example": "cat_123"
                 },
-                "CreateDate": {
+                "CreatedAt": {
                     "type": "string",
                     "example": "2026-01-20T00:00:00Z"
                 },
@@ -421,7 +421,7 @@ const docTemplate = `{
                     "type": "string",
                     "example": "64f8c..."
                 },
-                "UpdateDate": {
+                "UpdatedAt": {
                     "type": "string",
                     "example": "2026-01-20T00:00:00Z"
                 }
@@ -447,12 +447,12 @@ const docTemplate = `{
         "dto.UserResponse": {
             "type": "object",
             "required": [
-                "CreatedDate",
+                "CreatedAt",
                 "Email",
                 "ID"
             ],
             "properties": {
-                "CreatedDate": {
+                "CreatedAt": {
                     "type": "string",
                     "example": "2026-01-20T00:00:00Z"
                 },

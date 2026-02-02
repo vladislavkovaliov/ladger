@@ -11,6 +11,7 @@ import (
 // @Description Check service availability
 // @Tags system
 // @Produce json
+// @OperationId healthCheck
 // @Success 200 {object} dto.HealthResponse
 // @Router /health [get]
 func HealthHandler(c *gin.Context) {
